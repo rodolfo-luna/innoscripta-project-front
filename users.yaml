@@ -1,0 +1,21 @@
+credentials:
+  usernames:
+    rodolfo:
+      email: rodolfotff@gmail.com
+      name: Rodolfo
+      password: '$2b$12$jifltOsbdUqwZn1zI07Fvu7AfYP/KIZgSOcf0Ptj5T5RiNVpgnXdW'
+    ifeoma:
+      email: ifeoma@test.com
+      name: Ifeoma
+      password: '$2b$12$jifltOsbdUqwZn1zI07Fvu7AfYP/KIZgSOcf0Ptj5T5RiNVpgnXdW'
+    innoscripta:
+      email: innoscripta@test.com
+      name: Innoscripta
+      password: '$2b$12$jifltOsbdUqwZn1zI07Fvu7AfYP/KIZgSOcf0Ptj5T5RiNVpgnXdW'
+cookie:
+  expiry_days: 90
+  key: some_signature_key # Must be string
+  name: some_cookie_name
+preauthorized:
+  emails:
+  - melsby@gmail.com
