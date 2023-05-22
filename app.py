@@ -58,11 +58,17 @@ def set_page_title(title):
                 unsafe_allow_html=True)
     
 def format_body_text(text):
+    '''
+    Format the text inside the body of the page.
+    '''
 
     formatted_text = f'<p style="font-family:Roboto, sans-serif;color:#FFFFFF;font-size:20px;border-radius:2%;">{text}</p>'
     return formatted_text
 
 def set_background():
+    '''
+    Set background color and color gradient of the page.
+    '''
     st.markdown("""
                 <style>
                     .stApp {
@@ -74,6 +80,9 @@ def set_background():
                 unsafe_allow_html=True)
     
 def set_sidebar_background():
+    '''
+    Set background color and color gradient in sidebar of the page.
+    '''
     st.markdown("""
                 <style>
                     [data-testid=stSidebar] {
@@ -98,6 +107,9 @@ def get_data_from_api(company_name, country, website):
     return json.loads(response.content)
 
 def hide_forehead():
+    '''
+    Hide header of the page.
+    '''
     hide_streamlit_style = """
         <style>
             #MainMenu, header, footer {visibility: hidden;}
@@ -105,6 +117,9 @@ def hide_forehead():
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 def hide_menu():
+    '''
+    Hide Streamlit top-right menu.
+    '''
     hide_menu_style = """
         <style>
         #MainMenu {visibility: hidden;}
@@ -112,9 +127,11 @@ def hide_menu():
         """
     st.markdown(hide_menu_style, unsafe_allow_html=True)
 
+# Open the yaml file with allowed users.
 with open('users.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
 
+# Create the authenticator object with users credentials.
 authenticator = stauth.Authenticate(
     config['credentials'],
     config['cookie']['name'],
@@ -123,6 +140,7 @@ authenticator = stauth.Authenticate(
     config['preauthorized']
 )
 
+# Execute the authentication process.
 name, authentication_status, username = authenticator.login('Login', 'main')
 
 if authentication_status:
