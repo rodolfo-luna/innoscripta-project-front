@@ -11,13 +11,12 @@ def main():
     hide_menu()
     hide_forehead()
     set_sidebar_background()
-    set_background()
     authenticator.logout('Logout', 'main')
-    set_page_title("Innoscripta Global Data Competition")
+    st.title("Company Information")
     company_data = None
     with st.form('Main form'):
         with st.sidebar:
-            st.sidebar.markdown(format_body_text("Type the company name:"),unsafe_allow_html=True)
+            st.sidebar.markdown(format_body_text("Search company:"),unsafe_allow_html=True)
             company_name = st.sidebar.text_input("", key="company")   
             st.sidebar.markdown(format_body_text("Type the country:"),unsafe_allow_html=True)
             country = st.sidebar.text_input("", key="country")
@@ -33,29 +32,25 @@ def main():
                 else:
                     st.error('Company name and country is mandatory.')
     if company_data is not None:
-            output_list = ['Company name: {}'.format(company_data['Company Name']),
-                          'Country: {}'.format(company_data['Country']),
-                          'Website: {}'.format(company_data['Website']),
-                          'Products or Services: {}'.format(company_data['Products/Services']),
-                          'Keywords: {}'.format(company_data['keywords']),
-                          'Other info: {}'.format(company_data['Other Info']),
-                          'NAICS: {}'.format(company_data['NAICS']),
-                          'SIC: {}'.format(company_data['SIC'])
-                          ]
-            output = "\n".join(output_list)
-            st.text_area(label="Results:", value=output, height=220)
+        # Display the company information
+        st.subheader("Products/Services")
+        st.write(company_data["Products/Services"])
 
-            if len(company_data['Products/Services Images']) > 0:
-                st.markdown(format_body_text("Company products/services images: "),unsafe_allow_html=True)
-                st.image(company_data['Products/Services Images'][0])  
-                st.image(company_data['Products/Services Images'][1])    
+        st.subheader("Keywords")
+        st.write(company_data["keywords"])
 
-def set_page_title(title):
-    '''
-    Set the title of the page with font and font-size formatted.
-    '''
-    st.markdown(f'<p style="font-family:Roboto, sans-serif;color:#FFFFFF;;font-size:38px;border-radius:2%;">{title}</p>', 
-                unsafe_allow_html=True)
+        st.subheader("Additional Info")
+        st.write(company_data["Other Info"])
+
+        st.subheader("Product/Service Image")
+        st.image(company_data["Products/Services Images"])
+
+        st.subheader("Company SIC Code")
+        st.write(company_data["SIC"])
+
+        st.subheader("Company NAICS Code")
+        st.write(company_data["NAICS"])
+           
     
 def format_body_text(text):
     '''
@@ -65,19 +60,6 @@ def format_body_text(text):
     formatted_text = f'<p style="font-family:Roboto, sans-serif;color:#FFFFFF;font-size:20px;border-radius:2%;">{text}</p>'
     return formatted_text
 
-def set_background():
-    '''
-    Set background color and color gradient of the page.
-    '''
-    st.markdown("""
-                <style>
-                    .stApp {
-                    background: #2596be; 
-                    background: -webkit-linear-gradient(to right, #2596be, #50a49c); 
-                    background: linear-gradient(to right, #2596be, #50a49c); 
-                    }
-                </style>""", 
-                unsafe_allow_html=True)
     
 def set_sidebar_background():
     '''
@@ -149,4 +131,3 @@ elif authentication_status == False:
     st.error('Username/password is incorrect')
 elif authentication_status == None:
     st.warning('Please enter your username and password')
-    
